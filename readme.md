@@ -4,21 +4,6 @@
 
 ## Install
 
-Ensure you have these command-line tools installed:
-
-<details><summary>Dependencies</summary>
-
-* basename
-* bash
-* curl
-* sed
-* xargs
-* xsltproc
-
-</details>
-
-macOS already comes them pre-installed.
-
 Download the files:
 
 ```bash
