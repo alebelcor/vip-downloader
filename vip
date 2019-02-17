@@ -34,7 +34,7 @@ do
 		extension="${filename##*.}"
 		new_filename="${name}.${extension}"
 
-		echo "Downloading: ${new_filename}"
+		echo -e "Downloading: \033[1m${new_filename}\033[0m"
 
 		# download the file and rename it
 		curl --location -C - "${trimmed_url}" --output "${new_filename}" 2> /dev/null
