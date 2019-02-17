@@ -10,6 +10,13 @@ trim_playlist_node_attributes_command='s/<playlist.*>/<playlist>/'
 # stylesheet used to produce an easily parsable output by bash
 stylesheet='clean.xsl'
 
+# verify stylesheet file exists
+if ! test -f "${stylesheet}"
+then
+	echo "Stylesheet not found: ${stylesheet}"
+	exit 1
+fi
+
 while IFS= read -r line
 do
 	if test -z "${line}"
