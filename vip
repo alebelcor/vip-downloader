@@ -4,7 +4,7 @@
 roster_xml='https://vip.aersia.net/roster.xml'
 
 # strip the attributes of the <playlist> XML node
-# otherwise there's not XPath expression that can match it
+# otherwise the XPath expressions on the stylesheet won't match
 trim_playlist_node_attributes_command='s/<playlist.*>/<playlist>/'
 
 # stylesheet used to produce an easily parsable output by bash
