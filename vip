@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# contains the list of songs
+roster_xml='https://vip.aersia.net/roster.xml'
+
+# strip the attributes of the <playlist> XML node
+# otherwise there's not XPath expression that can match it
+trim_playlist_node_attributes_command='s/<playlist.*>/<playlist>/'
+
+# stylesheet used to produce an easily parsable output by bash
+stylesheet='clean.xsl'
+
+while IFS= read -r line
+do
+	if test -z "${line}"
+	then
+		continue
+	fi
+
+	while IFS='|' read -r url name filename
+	do
+		# for some reason the URL has some left padding, so trim it
+		trimmed_url=$(echo "${url}" | xargs)
+
+		# create the new filename
+		filename=$(basename -- "${trimmed_url}")
+		extension="${filename##*.}"
+		new_filename="${name}.${extension}"
+
+		echo "Downloading: ${new_filename}"
+
+		# download the file and rename it
+		curl --location -C - "${trimmed_url}" --output "${new_filename}" 2> /dev/null
+	done <<< "${line}"
+done < <(curl --silent "${roster_xml}" | sed "${trim_playlist_node_attributes_command}" | xsltproc "${stylesheet}" -)
