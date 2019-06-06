@@ -6,6 +6,7 @@
     <xsl:for-each select="track">
       <xsl:choose>
         <xsl:when test="title/text()='V10P!'"></xsl:when>
+        <xsl:when test="creator/text()='All Tracks'"></xsl:when>
         <xsl:when test="creator/text()='Changelog'"></xsl:when>
         <xsl:when test="creator/text()='Notice'"></xsl:when>
         <xsl:when test="creator/text()='Notice II'"></xsl:when>
